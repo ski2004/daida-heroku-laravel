@@ -4,7 +4,7 @@ use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
-echo "==1999934".__DIR__ ;
+
 /*
 |--------------------------------------------------------------------------
 | Check If Application Is Under Maintenance

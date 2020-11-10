@@ -16,9 +16,9 @@
         "laravel/tinker": "^2.5"
     },
     "require-dev": {
-        "heroku/heroku-buildpack-php": "*",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "heroku/heroku-buildpack-php": "^182.0",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
