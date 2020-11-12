@@ -1,0 +1,59 @@
+version: '3'
+services:
+  
+  # The Web Server
+  web:
+    container_name: web
+    build: ./docker-files/web/
+    ports:
+      - 8080:80
+
+  # The Database
+  database:
+    image: mariadb:10.3.8
+    volumes:
+    - dbdata:/var/lib/mysql
+    environment:
+    - "MYSQL_DATABASE=${DB_DATABASE}"
+    - "MYSQL_USER=${DB_USERNAME}"
+    - "MYSQL_PASSWORD=${DB_PASSWORD}"
+    - "MYSQL_ROOT_PASSWORD=${DB_PASSWORD}"
+    ports:
+    - "33061:3306"
+
+  # phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - database
+    volumes_from:
+      - database
+    environment:
+      - "PMA_HOST=database"
+      - "PMA_PORT:=3306"
+    ports:
+      - '4000:80'
+    depends_on:
+      - database
+
+  redis:
+    image: redis:latest
+    links:
+      - web
+    ports:
+      - '6379:6379'
+    entrypoint: redis-server --appendonly yes
+    restart: always
+
+  swagger:
+    container_name: swagger-ui
+    image: swaggerapi/swagger-ui
+    volumes:
+      - ./docker-files/swagger/swagger.json:/usr/share/nginx/html/swagger.json
+    environment:
+      API_URL: swagger.json
+    ports:
+      - "8081:8080"
+
+volumes:
+  dbdata:
