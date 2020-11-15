@@ -13,5 +13,3 @@
 `cp .env.example .env` -> 後於.env調整db連線
 
 `docker-compose up -d` ->可於 port 8081看到swagger文件
-
-composer.json及composer.lock不加入版控(需討論完由一人調整後，其他人pull)
