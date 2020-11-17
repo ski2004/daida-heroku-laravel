@@ -17,7 +17,18 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('/login', 'AuthController@login');
+Route::group(['prefix' => 'admin'], function () {
+    Route::post('register', 'Admin\Register')->name('admin-register');
+    Route::post('login', 'Admin\Login')->name('admin-login');
+    // Route::post('logout', 'Admin\Logout')->name('admin-logout');
+
+});
+Route::group(['prefix' => 'user'], function () {
+    Route::post('register', 'User\Register')->name('user-register');
+    Route::post('login', 'User\Login')->name('user-login');
+    // Route::post('logout', 'User\Logout')->name('user-logout');
+
+});
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', 'UserController@index');
