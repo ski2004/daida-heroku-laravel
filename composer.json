@@ -60,6 +60,9 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "docker-compose-up":[
+            "heroku container:push web"
         ]
     }
 }
